@@ -57,7 +57,7 @@ return new class extends Migration
                 $table->fullText('maiden_name');
             }
 
-            $table->string('country');
+            $table->string('country')->nullable();
         });
 
         Schema::create('user_vault', function (Blueprint $table) {
