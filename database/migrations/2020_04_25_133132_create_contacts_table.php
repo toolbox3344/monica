@@ -56,6 +56,8 @@ return new class extends Migration
                 $table->fullText('nickname');
                 $table->fullText('maiden_name');
             }
+
+            $table->string('country');
         });
 
         Schema::create('user_vault', function (Blueprint $table) {

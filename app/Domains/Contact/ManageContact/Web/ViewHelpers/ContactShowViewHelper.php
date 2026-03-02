@@ -8,6 +8,7 @@ use App\Domains\Contact\ManageContactAddresses\Web\ViewHelpers\ModuleContactAddr
 use App\Domains\Contact\ManageContactImportantDates\Web\ViewHelpers\ModuleImportantDatesViewHelper;
 use App\Domains\Contact\ManageContactInformation\Web\ViewHelpers\ModuleContactInformationViewHelper;
 use App\Domains\Contact\ManageContactName\Web\ViewHelpers\ModuleContactNameViewHelper;
+use App\Domains\Contact\ManageCountry\Web\ViewHelpers\ModuleCountryViewHelper;
 use App\Domains\Contact\ManageDocuments\Web\ViewHelpers\ModuleDocumentsViewHelper;
 use App\Domains\Contact\ManageGoals\Web\ViewHelpers\ModuleGoalsViewHelper;
 use App\Domains\Contact\ManageGroups\Web\ViewHelpers\GroupsViewHelper;
@@ -177,7 +178,6 @@ class ContactShowViewHelper
     {
         $contactInformationPage = $templatePages->firstWhere('type', TemplatePage::TYPE_CONTACT);
         $modules = $contactInformationPage->modules()->orderBy('position', 'asc')->get();
-
         $modulesCollection = collect();
         foreach ($modules as $module) {
             $data = [];
@@ -211,6 +211,10 @@ class ContactShowViewHelper
 
             if ($module->type == Module::TYPE_RELIGIONS) {
                 $data = ModuleReligionViewHelper::data($contact);
+            }
+
+            if ($module->type == Module::TYPE_COUNTRY) {
+                $data = ModuleCountryViewHelper::data($contact);
             }
 
             $modulesCollection->push([

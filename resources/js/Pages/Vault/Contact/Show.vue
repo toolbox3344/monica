@@ -31,6 +31,7 @@ import ContactInformation from '@/Shared/Modules/ContactInformation.vue';
 import Documents from '@/Shared/Modules/Documents.vue';
 import Photos from '@/Shared/Modules/Photos.vue';
 import Religion from '@/Shared/Modules/Religion.vue';
+import Country from '@/Shared/Modules/Country.vue';
 import Posts from '@/Shared/Modules/Posts.vue';
 import LifeEvent from '@/Shared/Modules/LifeEvent.vue';
 import QuickFacts from '@/Shared/Modules/QuickFacts.vue';
@@ -219,6 +220,8 @@ const navigateToSelected = () => {
                 <Labels v-else-if="module.type === 'labels'" :data="module.data" />
 
                 <JobInformation v-else-if="module.type === 'company'" :data="module.data" />
+
+                <Country v-else-if="module.type === 'countries'" :data="module.data" />
 
                 <Religion v-else-if="module.type === 'religions'" :data="module.data" />
               </div>

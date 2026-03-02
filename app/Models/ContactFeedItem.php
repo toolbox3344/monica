@@ -28,6 +28,7 @@ class ContactFeedItem extends Model
 
     public const ACTION_JOB_INFORMATION_UPDATED = 'job_information_updated';
 
+    public const ACTION_COUNTRY_UPDATED = 'country_updated';
     public const ACTION_RELIGION_UPDATED = 'religion_updated';
 
     public const ACTION_NOTE_CREATED = 'note_created';

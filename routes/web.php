@@ -17,6 +17,7 @@ use App\Domains\Contact\ManageContactAddresses\Web\Controllers\ContactModuleAddr
 use App\Domains\Contact\ManageContactFeed\Web\Controllers\ContactFeedController;
 use App\Domains\Contact\ManageContactImportantDates\Web\Controllers\ContactImportantDatesController;
 use App\Domains\Contact\ManageContactInformation\Web\Controllers\ContactInformationController;
+use App\Domains\Contact\ManageCountry\Web\Controllers\ContactModuleCountryController;
 use App\Domains\Contact\ManageDocuments\Web\Controllers\ContactModuleDocumentController;
 use App\Domains\Contact\ManageGoals\Web\Controllers\ContactGoalController;
 use App\Domains\Contact\ManageGoals\Web\Controllers\ContactModuleGoalController;
@@ -341,6 +342,9 @@ Route::middleware([
 
                     // religion
                     Route::put('religion', [ContactModuleReligionController::class, 'update'])->name('contact.religion.update');
+
+                    // country
+                    Route::put('country', [ContactModuleCountryController::class, 'update'])->name('contact.country.update');
 
                     // relationships
                     Route::get('relationships/create', [ContactRelationshipsController::class, 'create'])->name('contact.relationships.create');
