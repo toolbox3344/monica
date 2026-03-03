@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManageLoans\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Loan;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class ToggleLoan extends BaseService implements ServiceInterface
+class ToggleLoan extends DeathGunContactService
 {
     private Loan $loan;
 
@@ -27,18 +26,6 @@ class ToggleLoan extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
-        ];
-    }
 
     /**
      * Toggle a loan.

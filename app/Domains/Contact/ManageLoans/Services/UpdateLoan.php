@@ -2,6 +2,7 @@
 
 namespace App\Domains\Contact\ManageLoans\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Interfaces\ServiceInterface;
 use App\Models\Contact;
 use App\Models\Loan;
@@ -10,7 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
-class UpdateLoan extends BaseService implements ServiceInterface
+class UpdateLoan extends DeathGunContactService
 {
     private Loan $loan;
 
@@ -39,19 +40,6 @@ class UpdateLoan extends BaseService implements ServiceInterface
             'loanee_ids' => 'required',
             'amount_lent' => 'nullable|integer',
             'loaned_at' => 'nullable|date_format:Y-m-d',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
         ];
     }
 

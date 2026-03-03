@@ -2,15 +2,14 @@
 
 namespace App\Domains\Contact\ManageContact\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Contact;
 use App\Models\ContactFeedItem;
 use App\Models\Gender;
 use App\Models\Pronoun;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class UpdateContact extends BaseService implements ServiceInterface
+class UpdateContact extends DeathGunContactService
 {
     private array $data;
 

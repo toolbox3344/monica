@@ -2,14 +2,13 @@
 
 namespace App\Domains\Contact\ManageAvatar\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Contact;
 use App\Models\ContactFeedItem;
 use App\Models\File;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class UpdatePhotoAsAvatar extends BaseService implements ServiceInterface
+class UpdatePhotoAsAvatar extends DeathGunContactService
 {
     private File $file;
 
@@ -26,19 +25,6 @@ class UpdatePhotoAsAvatar extends BaseService implements ServiceInterface
             'author_id' => 'required|uuid|exists:users,id',
             'contact_id' => 'required|uuid|exists:contacts,id',
             'file_id' => 'nullable|integer|exists:files,id',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
         ];
     }
 

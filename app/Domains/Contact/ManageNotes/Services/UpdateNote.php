@@ -2,14 +2,13 @@
 
 namespace App\Domains\Contact\ManageNotes\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\ContactFeedItem;
 use App\Models\Note;
-use App\Services\BaseService;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-class UpdateNote extends BaseService implements ServiceInterface
+class UpdateNote extends DeathGunContactService
 {
     private Note $note;
 
@@ -27,19 +26,6 @@ class UpdateNote extends BaseService implements ServiceInterface
             'emotion_id' => 'nullable|integer|exists:emotions,id',
             'title' => 'nullable|string|max:255',
             'body' => 'required|string|max:65535',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
         ];
     }
 

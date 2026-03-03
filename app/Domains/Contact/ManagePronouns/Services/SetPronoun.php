@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManagePronouns\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Pronoun;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class SetPronoun extends BaseService implements ServiceInterface
+class SetPronoun extends DeathGunContactService
 {
     private Pronoun $pronoun;
 
@@ -25,18 +24,6 @@ class SetPronoun extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
-        ];
-    }
 
     /**
      * Set a contact's pronoun.

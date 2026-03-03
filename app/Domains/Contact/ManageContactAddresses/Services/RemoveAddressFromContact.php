@@ -2,14 +2,13 @@
 
 namespace App\Domains\Contact\ManageContactAddresses\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Helpers\MapHelper;
-use App\Interfaces\ServiceInterface;
 use App\Models\Address;
 use App\Models\ContactFeedItem;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class RemoveAddressFromContact extends BaseService implements ServiceInterface
+class RemoveAddressFromContact extends DeathGunContactService
 {
     private Address $address;
 

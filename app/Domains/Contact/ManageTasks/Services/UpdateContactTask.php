@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManageTasks\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\ContactTask;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class UpdateContactTask extends BaseService implements ServiceInterface
+class UpdateContactTask extends DeathGunContactService
 {
     private ContactTask $task;
 
@@ -25,19 +24,6 @@ class UpdateContactTask extends BaseService implements ServiceInterface
             'label' => 'required|string|max:255',
             'description' => 'nullable|string|max:65535',
             'due_at' => 'nullable|date',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
         ];
     }
 

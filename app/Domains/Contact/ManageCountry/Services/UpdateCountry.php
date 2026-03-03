@@ -2,6 +2,7 @@
 
 namespace App\Domains\Contact\ManageCountry\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Enums\Country;
 use App\Interfaces\ServiceInterface;
 use App\Models\Contact;
@@ -10,7 +11,7 @@ use App\Services\BaseService;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 
-class UpdateCountry extends BaseService implements ServiceInterface
+class UpdateCountry extends DeathGunContactService
 {
 
     public function rules(): array
@@ -23,20 +24,6 @@ class UpdateCountry extends BaseService implements ServiceInterface
             'country' => ['nullable', 'string', Rule::enum(Country::class)],
         ];
     }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
-        ];
-    }
-
 
     public function execute(array $data): Contact
     {

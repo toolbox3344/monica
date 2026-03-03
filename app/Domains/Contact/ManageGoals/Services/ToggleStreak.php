@@ -2,13 +2,12 @@
 
 namespace App\Domains\Contact\ManageGoals\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Goal;
 use App\Models\Streak;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class ToggleStreak extends BaseService implements ServiceInterface
+class ToggleStreak extends DeathGunContactService
 {
     private Goal $goal;
 
@@ -26,19 +25,6 @@ class ToggleStreak extends BaseService implements ServiceInterface
             'contact_id' => 'required|uuid|exists:contacts,id',
             'goal_id' => 'nullable|integer|exists:goals,id',
             'happened_at' => 'required|date_format:Y-m-d',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
         ];
     }
 

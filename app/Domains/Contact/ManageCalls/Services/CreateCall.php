@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManageCalls\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Call;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class CreateCall extends BaseService implements ServiceInterface
+class CreateCall extends DeathGunContactService
 {
     private Call $call;
 
@@ -31,19 +30,6 @@ class CreateCall extends BaseService implements ServiceInterface
             'answered' => 'nullable|boolean',
             'who_initiated' => 'required|string',
             'emotion_id' => 'nullable|integer|exists:emotions,id',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
         ];
     }
 

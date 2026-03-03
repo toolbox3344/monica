@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManageTasks\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\ContactTask;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class ToggleContactTask extends BaseService implements ServiceInterface
+class ToggleContactTask extends DeathGunContactService
 {
     private ContactTask $task;
 
@@ -25,18 +24,6 @@ class ToggleContactTask extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
-        ];
-    }
 
     /**
      * Toggle a contact task.

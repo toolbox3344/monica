@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManageContact\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Contact;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class UpdateContactTemplate extends BaseService implements ServiceInterface
+class UpdateContactTemplate extends DeathGunContactService
 {
     private array $data;
 
@@ -22,19 +21,6 @@ class UpdateContactTemplate extends BaseService implements ServiceInterface
             'author_id' => 'required|uuid|exists:users,id',
             'contact_id' => 'required|uuid|exists:contacts,id',
             'template_id' => 'required|integer|exists:templates,id',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
         ];
     }
 

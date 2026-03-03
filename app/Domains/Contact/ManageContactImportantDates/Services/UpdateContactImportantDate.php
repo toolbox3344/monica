@@ -2,6 +2,7 @@
 
 namespace App\Domains\Contact\ManageContactImportantDates\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Helpers\ImportantDateHelper;
 use App\Interfaces\ServiceInterface;
 use App\Models\ContactFeedItem;
@@ -9,7 +10,7 @@ use App\Models\ContactImportantDate;
 use App\Services\BaseService;
 use Carbon\Carbon;
 
-class UpdateContactImportantDate extends BaseService implements ServiceInterface
+class UpdateContactImportantDate extends DeathGunContactService
 {
     private ContactImportantDate $date;
 
@@ -31,19 +32,6 @@ class UpdateContactImportantDate extends BaseService implements ServiceInterface
             'day' => 'nullable|integer',
             'month' => 'nullable|integer',
             'year' => 'nullable|integer',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
         ];
     }
 

@@ -2,14 +2,13 @@
 
 namespace App\Domains\Contact\ManageContactAddresses\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Helpers\MapHelper;
-use App\Interfaces\ServiceInterface;
 use App\Models\Address;
 use App\Models\ContactFeedItem;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class AssociateAddressToContact extends BaseService implements ServiceInterface
+class AssociateAddressToContact extends DeathGunContactService
 {
     private Address $address;
 
@@ -27,19 +26,6 @@ class AssociateAddressToContact extends BaseService implements ServiceInterface
             'contact_id' => 'required|uuid|exists:contacts,id',
             'address_id' => 'required|integer|exists:addresses,id',
             'is_past_address' => 'required|boolean',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
         ];
     }
 

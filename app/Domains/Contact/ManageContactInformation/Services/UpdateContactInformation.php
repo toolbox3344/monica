@@ -2,13 +2,14 @@
 
 namespace App\Domains\Contact\ManageContactInformation\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Interfaces\ServiceInterface;
 use App\Models\ContactFeedItem;
 use App\Models\ContactInformation;
 use App\Services\BaseService;
 use Carbon\Carbon;
 
-class UpdateContactInformation extends BaseService implements ServiceInterface
+class UpdateContactInformation extends DeathGunContactService
 {
     private ContactInformation $contactInformation;
 
@@ -28,19 +29,6 @@ class UpdateContactInformation extends BaseService implements ServiceInterface
             'contact_information_id' => 'required|integer|exists:contact_information,id',
             'contact_information_kind' => 'nullable|string',
             'data' => 'required|string|max:255',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
         ];
     }
 

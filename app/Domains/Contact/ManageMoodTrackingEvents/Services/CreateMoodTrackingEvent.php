@@ -2,13 +2,14 @@
 
 namespace App\Domains\Contact\ManageMoodTrackingEvents\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Interfaces\ServiceInterface;
 use App\Models\ContactFeedItem;
 use App\Models\MoodTrackingEvent;
 use App\Services\BaseService;
 use Carbon\Carbon;
 
-class CreateMoodTrackingEvent extends BaseService implements ServiceInterface
+class CreateMoodTrackingEvent extends DeathGunContactService
 {
     private MoodTrackingEvent $moodTrackingEvent;
 
@@ -26,19 +27,6 @@ class CreateMoodTrackingEvent extends BaseService implements ServiceInterface
             'rated_at' => 'required|date_format:Y-m-d',
             'note' => 'nullable|string|max:65535',
             'number_of_hours_slept' => 'nullable|integer',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
         ];
     }
 

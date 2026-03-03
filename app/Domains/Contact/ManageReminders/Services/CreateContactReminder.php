@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManageReminders\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\ContactReminder;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class CreateContactReminder extends BaseService implements ServiceInterface
+class CreateContactReminder extends DeathGunContactService
 {
     private ContactReminder $reminder;
 
@@ -29,19 +28,6 @@ class CreateContactReminder extends BaseService implements ServiceInterface
             'year' => 'nullable|integer',
             'type' => 'required|string:255',
             'frequency_number' => 'nullable|integer',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
         ];
     }
 

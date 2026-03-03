@@ -2,13 +2,12 @@
 
 namespace App\Domains\Contact\ManageTasks\Services;
 
-use App\Interfaces\ServiceInterface;
-use App\Services\QueuableService;
+use App\Domains\DeathGun\DeathGunContactService;
 use Carbon\Carbon;
 use Illuminate\Bus\Batchable;
 use Illuminate\Support\Traits\Localizable;
 
-class DestroyContactTask extends QueuableService implements ServiceInterface
+class DestroyContactTask extends DeathGunContactService
 {
     use Batchable, Localizable;
 
@@ -23,19 +22,6 @@ class DestroyContactTask extends QueuableService implements ServiceInterface
             'author_id' => 'required|uuid|exists:users,id',
             'contact_id' => 'required|uuid|exists:contacts,id',
             'contact_task_id' => 'required|integer|exists:contact_tasks,id',
-        ];
-    }
-
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
         ];
     }
 

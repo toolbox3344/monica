@@ -2,13 +2,14 @@
 
 namespace App\Domains\Contact\ManageLabels\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Interfaces\ServiceInterface;
 use App\Models\ContactFeedItem;
 use App\Models\Label;
 use App\Services\BaseService;
 use Carbon\Carbon;
 
-class RemoveLabel extends BaseService implements ServiceInterface
+class RemoveLabel extends DeathGunContactService
 {
     private Label $label;
 
@@ -26,18 +27,6 @@ class RemoveLabel extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
-        ];
-    }
 
     /**
      * Remove a label from the contact.

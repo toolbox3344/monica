@@ -2,12 +2,11 @@
 
 namespace App\Domains\Contact\ManageReminders\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\ContactReminder;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class DestroyReminder extends BaseService implements ServiceInterface
+class DestroyReminder extends DeathGunContactService
 {
     private ContactReminder $reminder;
 
@@ -25,18 +24,6 @@ class DestroyReminder extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
-        ];
-    }
 
     /**
      * Destroy a reminder.

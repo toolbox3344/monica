@@ -2,14 +2,13 @@
 
 namespace App\Domains\Contact\ManageReligion\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Contact;
 use App\Models\ContactFeedItem;
 use App\Models\Religion;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class UpdateReligion extends BaseService implements ServiceInterface
+class UpdateReligion extends DeathGunContactService
 {
     private Religion $religion;
 
@@ -27,18 +26,6 @@ class UpdateReligion extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
-        ];
-    }
 
     /**
      * Update religion of the given contact.

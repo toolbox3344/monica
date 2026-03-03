@@ -2,11 +2,12 @@
 
 namespace App\Domains\Contact\ManageQuickFacts\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Interfaces\ServiceInterface;
 use App\Models\QuickFact;
 use App\Services\BaseService;
 
-class CreateQuickFact extends BaseService implements ServiceInterface
+class CreateQuickFact extends DeathGunContactService
 {
     private QuickFact $quickFact;
 
@@ -27,18 +28,6 @@ class CreateQuickFact extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'author_must_be_vault_editor',
-            'contact_must_belong_to_vault',
-        ];
-    }
 
     /**
      * Create a quick fact.

@@ -2,13 +2,12 @@
 
 namespace App\Domains\Contact\ManagePets\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\ContactFeedItem;
 use App\Models\Pet;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class DestroyPet extends BaseService implements ServiceInterface
+class DestroyPet extends DeathGunContactService
 {
     private Pet $pet;
 
@@ -26,18 +25,6 @@ class DestroyPet extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
-        ];
-    }
 
     /**
      * Destroy a pet.

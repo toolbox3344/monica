@@ -2,6 +2,7 @@
 
 namespace App\Domains\Contact\ManageNotes\Services;
 
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Interfaces\ServiceInterface;
 use App\Models\ContactFeedItem;
 use App\Models\Note;
@@ -9,7 +10,7 @@ use App\Services\BaseService;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
-class DestroyNote extends BaseService implements ServiceInterface
+class DestroyNote extends DeathGunContactService
 {
     private Note $note;
 
@@ -27,18 +28,6 @@ class DestroyNote extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
-        ];
-    }
 
     /**
      * Destroy a note.

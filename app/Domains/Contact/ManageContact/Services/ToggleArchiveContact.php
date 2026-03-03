@@ -2,13 +2,12 @@
 
 namespace App\Domains\Contact\ManageContact\Services;
 
-use App\Interfaces\ServiceInterface;
+use App\Domains\DeathGun\DeathGunContactService;
 use App\Models\Contact;
 use App\Models\ContactFeedItem;
-use App\Services\BaseService;
 use Carbon\Carbon;
 
-class ToggleArchiveContact extends BaseService implements ServiceInterface
+class ToggleArchiveContact extends DeathGunContactService
 {
     private array $data;
 
@@ -25,18 +24,6 @@ class ToggleArchiveContact extends BaseService implements ServiceInterface
         ];
     }
 
-    /**
-     * Get the permissions that apply to the user calling the service.
-     */
-    public function permissions(): array
-    {
-        return [
-            'author_must_belong_to_account',
-            'vault_must_belong_to_account',
-            'contact_must_belong_to_vault',
-            'author_must_be_vault_editor',
-        ];
-    }
 
     /**
      * Toggle the archive state of a contact.
