@@ -2,7 +2,7 @@
 
 namespace App\Mcp\Tools;
 
-use App\Domains\Contact\ManageContact\Services\CreateContact;
+use App\Domains\Contact\ManageContact\Services\UpdateContact;
 use App\Domains\Contact\ManageCountry\Services\UpdateCountry;
 use App\Enums\Country;
 use App\Models\Contact;
@@ -12,8 +12,8 @@ use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\Server\Attributes\Description;
 
-#[Description('Store a new contact.')]
-class StoreContactTool extends BaseTool
+#[Description('Edit a contact.')]
+class EditContactTool extends BaseTool
 {
 
     /**
@@ -25,27 +25,38 @@ class StoreContactTool extends BaseTool
 
         DB::beginTransaction();
 
-        $this->contact = $this->saveContact($request);
+        $this->contact = $this->editContact($request);
 
-        $this->saveCountry($request);
+        $this->editCountry($request);
 
         DB::commit();
 
-        return Response::text('Contact created successfully.');
+        return Response::text('Contact edited successfully.');
     }
 
-    private function saveContact(Request $request): Contact
+    private function editContact(Request $request): Contact
     {
-        return app(CreateContact::class)
+        $contact = Contact::find($request->get('contact_id'));
+
+        $gender = $request->get('gender');
+
+        if ($gender) {
+            $gender = $this->getGenderByName($gender)?->id;
+        } else {
+            $gender = $contact->gender_id;
+        }
+
+        return app(UpdateContact::class)
             ->execute($this->buildData([
-                'first_name' => $request->get('first_name'),
-                'last_name' => $request->get('last_name'),
-                'gender_id' => $this->getGenderByName($request->get('gender'))?->id,
-                'listed' => true
+                'contact_id' => $request->get('contact_id'),
+                'first_name' => $request->get('first_name', $contact->first_name),
+                'last_name' => $request->get('last_name', $contact->last_name),
+                'gender_id' => $gender
             ]));
     }
 
-    private function saveCountry(Request $request): void
+
+    private function editCountry(Request $request): void
     {
         $country = $request->get('country');
 
@@ -57,7 +68,6 @@ class StoreContactTool extends BaseTool
         }
     }
 
-
     /**
      * Get the tool's input schema.
      *
@@ -66,7 +76,8 @@ class StoreContactTool extends BaseTool
     public function schema(JsonSchema $schema): array
     {
         return [
-            'first_name' => $schema->string()->required(),
+            'contact_id' => $schema->string()->required(),
+            'first_name' => $schema->string(),
             'last_name' => $schema->string(),
             'gender' => $schema->string()->enum(['Male', 'Female']),
             'country' => $schema->string()->enum(Country::cases()),

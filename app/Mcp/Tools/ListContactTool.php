@@ -11,11 +11,10 @@ use Laravel\Mcp\Request;
 use Laravel\Mcp\Response;
 use Laravel\Mcp\ResponseFactory;
 use Laravel\Mcp\Server\Attributes\Description;
-use Laravel\Mcp\Server\Tool;
 use Throwable;
 
 #[Description('List contacts.')]
-class ListContactTool extends Tool
+class ListContactTool extends BaseTool
 {
 
     /**
@@ -27,8 +26,12 @@ class ListContactTool extends Tool
 
         $firstName = $request->get('first_name');
         $lastName = $request->get('last_name');
-        $gender = $request->get('gender');
         $country = $request->get('country');
+        $gender = $request->get('gender');
+
+        if ($gender) {
+            $gender = $this->getGenderByName($gender)?->id;
+        }
 
         $contacts = Vault::find(config('mcp.vault_id'))
             ->contacts()
@@ -62,7 +65,7 @@ class ListContactTool extends Tool
         return [
             'first_name' => $schema->string(),
             'last_name' => $schema->string(),
-            'gender' => $schema->string()->enum([Gender::MALE, Gender::FEMALE]),
+            'gender' => $schema->string()->enum(['Male', 'Female']),
             'country' => $schema->string()->enum(Country::cases()),
             'cursor' => $schema->string()
                 ->nullable()

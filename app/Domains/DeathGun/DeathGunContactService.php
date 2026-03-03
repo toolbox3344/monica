@@ -5,7 +5,7 @@ namespace App\Domains\DeathGun;
 use App\Interfaces\ServiceInterface;
 use App\Services\BaseService;
 
-abstract class DeathGunContactService  extends BaseService implements ServiceInterface
+abstract class DeathGunContactService extends BaseService implements ServiceInterface
 {
 
     /**
@@ -20,5 +20,7 @@ abstract class DeathGunContactService  extends BaseService implements ServiceInt
             'contact_must_belong_to_vault',
         ];
     }
+
+    //TODO: Cacher les rules
 
 }

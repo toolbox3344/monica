@@ -2,6 +2,7 @@
 
 namespace App\Mcp\Servers;
 
+use App\Mcp\Tools\EditContactTool;
 use App\Mcp\Tools\ListContactTool;
 use App\Mcp\Tools\StoreContactTool;
 use Laravel\Mcp\Server;
@@ -16,6 +17,7 @@ class MonicaServer extends Server
 {
     protected array $tools = [
         StoreContactTool::class,
+        EditContactTool::class,
         ListContactTool::class
     ];
 
